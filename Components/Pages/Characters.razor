@@ -1,0 +1,37 @@
+﻿@page "/characters/all"
+@inject ApiService ApiService
+@inject HttpClient Http
+<PageTitle>Characters</PageTitle>
+
+
+@if (characters == null)
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	foreach (var character in characters)
+	{
+		<p>@character.Name</p>
+	}
+}
+
+@code {
+	private List<GetCharacterDTO>? characters;
+
+	protected override async Task OnInitializedAsync()
+	{
+		try
+		{
+			characters = await ApiService.GetAllCharacters();
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine(ex.Message);
+		}
+		finally
+		{
+			StateHasChanged();
+		}
+	}
+}

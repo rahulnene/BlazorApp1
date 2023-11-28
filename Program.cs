@@ -1,9 +1,16 @@
 using BlazorApp1.Components;
+using BlazorApp1.Data;
+using BlazorApp1.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents();
+builder.Services.AddHttpClient();
+builder.Services.AddAntiforgery();
+builder.Services.AddScoped<ApiService>();
+builder.Services.AddScoped<GetCharacterDTO>();
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -15,11 +22,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.MapRazorPages();
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
+app.UseRouting();
 app.UseAntiforgery();
-
 app.MapRazorComponents<App>();
 
 app.Run();
