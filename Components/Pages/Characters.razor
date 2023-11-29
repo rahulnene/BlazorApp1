@@ -10,10 +10,33 @@
 }
 else
 {
-	foreach (var character in characters)
-	{
-		<p>@character.Name</p>
-	}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Health</th>
+                <th>Strength</th>
+                <th>Defense</th>
+                <th>Intelligence</th>
+                <th>Class</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var character in characters)
+            {
+                <tr>
+                    <td>@character.Id</td>
+                    <td>@character.Name</td>
+                    <td>@character.HitPoints</td>
+                    <td>@character.Strength</td>
+                    <td>@character.Defense</td>
+                    <td>@character.Intelligence</td>
+                    <td>@character.Class</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 
 @code {
