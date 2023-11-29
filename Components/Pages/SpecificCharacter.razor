@@ -1,0 +1,72 @@
+﻿@page "/characters/{id}"
+@inject ApiService ApiService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Characters</PageTitle>
+
+@if (character == null)
+{
+    <p><em>Character Not Found</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Health</th>
+                <th>Strength</th>
+                <th>Defense</th>
+                <th>Intelligence</th>
+                <th>Class</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@character.Id</td>
+                <td>@character.Name</td>
+                <td>@character.HitPoints</td>
+                <td>@character.Strength</td>
+                <td>@character.Defense</td>
+                <td>@character.Intelligence</td>
+                <td>@character.Class</td>
+            </tr>
+        </tbody>
+    </table>
+}
+
+@code {
+    private GetCharacterDTO character;
+
+    [Parameter] public string id { get; set; } = "1";
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                NavigationManager.NavigateTo("/characters/all");
+                return;
+            }
+
+            if (!int.TryParse(id, out int parsedId))
+            {
+                Console.WriteLine("Invalid ID format");
+                NavigationManager.NavigateTo("/characters/all");
+                return;
+            }
+
+            character = await ApiService.GetCharacter(parsedId);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            StateHasChanged();
+        }
+    }
+}

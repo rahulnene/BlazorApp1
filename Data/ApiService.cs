@@ -23,6 +23,19 @@ namespace BlazorApp1.Data
 				return new List<GetCharacterDTO>();
 			}
 		}
+		public async Task<GetCharacterDTO?> GetCharacter(int id)
+		{
+			try
+			{
+				return await _httpClient.GetFromJsonAsync<GetCharacterDTO>($"https://localhost:7163/api/Character/{id}");
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+				return null;
+			}
+		}
+
 
 	}
 }
