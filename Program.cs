@@ -1,6 +1,6 @@
 using BlazorApp1.Components;
 using BlazorApp1.Data;
-using BlazorApp1.Models;
+using dotnet_todo.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
