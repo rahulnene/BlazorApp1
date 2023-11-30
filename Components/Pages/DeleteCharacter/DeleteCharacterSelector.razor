@@ -1,26 +1,27 @@
-﻿@page "/characters"
+﻿@page "/characters/delete"
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 @rendermode InteractiveServer
 <PageTitle>Characters</PageTitle>
 
+<p>Enter Character Id to Delete Character</p>
 <input type="number" title="Select Id" @bind="selectedId"/>
 
-<button class="btn btn-primary" @onclick="() => GetCharacterAsync()">Get Character</button>
+<button class="btn btn-primary" @onclick="() => DeleteCharacterAsync()">Delete Character</button>
 
 @code {
-    private int selectedId = 1;
+    private int selectedId = 0;
 
-    private async Task GetCharacterAsync()
+    private async Task DeleteCharacterAsync()
     {
-        Console.WriteLine("GetCharacterAsync()");
+        Console.WriteLine("DeleteCharacterAsync()");
         try
         {
             // Debugging: Print selectedId to console
             Console.WriteLine($"Selected Id: {selectedId}");
 
             // Debugging: Print the target URL to console
-            var targetUrl = $"/characters/{selectedId}";
+            var targetUrl = $"/characters/delete/{selectedId}";
             Console.WriteLine($"Target URL: {targetUrl}");
 
             // Navigate to the target URL

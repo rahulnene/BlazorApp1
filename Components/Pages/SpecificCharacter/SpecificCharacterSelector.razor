@@ -1,0 +1,36 @@
+﻿@page "/characters"
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+<PageTitle>Characters</PageTitle>
+
+<p>Enter Character Id to View Data</p>
+<input type="number" title="Select Id" @bind="selectedId" />
+
+<button class="btn btn-primary" @onclick="() => GetCharacterAsync()">Get Character</button>
+
+@code {
+	private int selectedId = 0;
+
+	private async Task GetCharacterAsync()
+	{
+		Console.WriteLine("GetCharacterAsync()");
+		try
+		{
+			// Debugging: Print selectedId to console
+			Console.WriteLine($"Selected Id: {selectedId}");
+
+			// Debugging: Print the target URL to console
+			var targetUrl = $"/characters/{selectedId}";
+			Console.WriteLine($"Target URL: {targetUrl}");
+
+			// Navigate to the target URL
+			NavigationManager.NavigateTo(targetUrl);
+		}
+		catch (Exception ex)
+		{
+			// Debugging: Print any exception to the console
+			Console.WriteLine($"Error: {ex.Message}");
+		}
+	}
+}
