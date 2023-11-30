@@ -11,23 +11,23 @@ namespace BlazorApp1.Data
             _httpClient = httpClient;
         }
 
-		public async Task<List<GetCharacterDTO>> GetAllCharacters()
+		public async Task<List<Character>> GetAllCharacters()
 		{
 			try
 			{
-				return await _httpClient.GetFromJsonAsync<List<GetCharacterDTO>>("https://localhost:7163/api/Character/GetAll");
+				return await _httpClient.GetFromJsonAsync<List<Character>>("https://localhost:7163/api/Character/GetAll");
 			}
 			catch (Exception ex)
 			{
 				Console.WriteLine(ex.Message);
-				return new List<GetCharacterDTO>();
+				return new List<Character>();
 			}
 		}
-		public async Task<GetCharacterDTO?> GetCharacter(int id)
+		public async Task<Character?> GetCharacter(int id)
 		{
 			try
 			{
-				return await _httpClient.GetFromJsonAsync<GetCharacterDTO>($"https://localhost:7163/api/Character/{id}");
+				return await _httpClient.GetFromJsonAsync<Character>($"https://localhost:7163/api/Character/{id}");
 			}
 			catch (Exception ex)
 			{
