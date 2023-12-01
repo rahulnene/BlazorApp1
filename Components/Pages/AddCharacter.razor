@@ -1,6 +1,51 @@
 ﻿@page "/characters/add"
 @inject ApiService ApiService
 @inject HttpClient Http
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
 <PageTitle>Characters</PageTitle>
 
-//todo: add form to add character
+<h1> Enter Character Details</h1>
+
+<EditForm Model=@character OnValidSubmit="@Submit" FormName="AddCharacter">
+	<DataAnnotationsValidator />
+	<ValidationSummary />
+	<div>
+		<label for="Name">Name</label>
+		<InputText id="Name" @bind-Value="character.Name" />
+	</div>
+	<div>
+		<label for="Class">Class</label>
+		<InputText id="Class" @bind-Value="character.Class" />
+	</div>
+	<div>
+		<label for="HitPoints">HP</label>
+		<InputNumber id="HitPoints" @bind-Value="character.HitPoints" />
+	</div>
+	<div>
+		<label for="Strength">Strength</label>
+		<InputNumber id="Strength" @bind-Value="character.Strength" />
+	</div>
+	<div>
+		<label for="Defense">Defense</label>
+		<InputNumber id="Defense" @bind-Value="character.Defense" />
+	</div>
+	<div>
+		<label for="Intelligence">Intelligence</label>
+		<InputNumber id="Intelligence" @bind-Value="character.Intelligence" />
+	</div>
+	<div>
+		<button type="submit">Submit</button>
+	</div>
+</EditForm>
+
+@code {
+	Character character = new Character();
+
+	async Task Submit()
+	{
+		await ApiService.AddCharacter(character);
+		NavigationManager.NavigateTo("/characters/all");
+	}
+}
+```
