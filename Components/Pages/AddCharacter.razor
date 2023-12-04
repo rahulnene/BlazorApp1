@@ -5,47 +5,56 @@
 @rendermode InteractiveServer
 <PageTitle>Characters</PageTitle>
 
-<h1> Enter Character Details</h1>
+<div>
+    @if (AddedCharacterId != 0)
+    {
+        <p>The ID of your added character is: @AddedCharacterId</p>
+    }
+    else
+    {
+        <h1> Enter Character Details</h1>
 
-<EditForm Model=@character OnValidSubmit="@Submit" FormName="AddCharacter">
-	<DataAnnotationsValidator />
-	<ValidationSummary />
-	<div>
-		<label for="Name">Name</label>
-		<InputText id="Name" @bind-Value="character.Name" />
-	</div>
-	<div>
-		<label for="Class">Class</label>
-		<InputText id="Class" @bind-Value="character.Class" />
-	</div>
-	<div>
-		<label for="HitPoints">HP</label>
-		<InputNumber id="HitPoints" @bind-Value="character.HitPoints" />
-	</div>
-	<div>
-		<label for="Strength">Strength</label>
-		<InputNumber id="Strength" @bind-Value="character.Strength" />
-	</div>
-	<div>
-		<label for="Defense">Defense</label>
-		<InputNumber id="Defense" @bind-Value="character.Defense" />
-	</div>
-	<div>
-		<label for="Intelligence">Intelligence</label>
-		<InputNumber id="Intelligence" @bind-Value="character.Intelligence" />
-	</div>
-	<div>
-		<button type="submit">Submit</button>
-	</div>
-</EditForm>
+        <EditForm Model=@character OnValidSubmit="@Submit" FormName="AddCharacter">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div>
+                <label for="Name">Name</label>
+                <InputText id="Name" @bind-Value="character.Name" />
+            </div>
+            <div>
+                <label for="Class">Class</label>
+                <InputText id="Class" @bind-Value="character.Class" />
+            </div>
+            <div>
+                <label for="HitPoints">HP</label>
+                <InputNumber id="HitPoints" @bind-Value="character.HitPoints" />
+            </div>
+            <div>
+                <label for="Strength">Strength</label>
+                <InputNumber id="Strength" @bind-Value="character.Strength" />
+            </div>
+            <div>
+                <label for="Defense">Defense</label>
+                <InputNumber id="Defense" @bind-Value="character.Defense" />
+            </div>
+            <div>
+                <label for="Intelligence">Intelligence</label>
+                <InputNumber id="Intelligence" @bind-Value="character.Intelligence" />
+            </div>
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+        </EditForm>
+    }
+</div>
+
 
 @code {
-	Character character = new Character();
-
-	async Task Submit()
-	{
-		await ApiService.AddCharacter(character);
-		NavigationManager.NavigateTo("/characters/all");
-	}
+    Character character = new Character();
+    int AddedCharacterId;
+    async Task Submit()
+    {
+        AddedCharacterId = await ApiService.AddCharacter(character);
+        StateHasChanged();
+    }
 }
-```

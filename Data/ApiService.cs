@@ -45,14 +45,19 @@ namespace BlazorApp1.Data
                 throw new Exception($"Error: {response.StatusCode}");
             }
         }
-        public async Task AddCharacter(Character newCharacter)
+        public async Task<int> AddCharacter(Character newCharacter)
         {
             var response = await _httpClient.PostAsJsonAsync<Character>("https://localhost:7163/api/Character/new", newCharacter);
-
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception($"Error: {response.StatusCode}");
             }
+            string character_id_str = await response.Content.ReadAsStringAsync();
+            int character_id = Convert.ToInt32(character_id_str);
+            return character_id;
+            
+
+            
         }
 
 
