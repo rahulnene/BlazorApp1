@@ -55,9 +55,14 @@ namespace BlazorApp1.Data
             string character_id_str = await response.Content.ReadAsStringAsync();
             int character_id = Convert.ToInt32(character_id_str);
             return character_id;
-            
-
-            
+        }
+        public async Task UpdateCharacter(UpdateCharacterDTO character)
+        {
+            var response = await _httpClient.PatchAsJsonAsync("https://localhost:7163/api/Character/update", character);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"Error: {response.StatusCode}");
+            }
         }
 
 
