@@ -1,4 +1,6 @@
 ﻿using dotnet_todo.Models;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System.Net.Http.Headers;
 
 namespace BlazorApp1.Data
 {
@@ -35,10 +37,15 @@ namespace BlazorApp1.Data
                 return null;
             }
         }
-        public async Task DeleteCharacter(int id)
+        public async Task DeleteCharacter(int id, string JWT)
         {
-
-            var response = await _httpClient.DeleteAsync($"https://localhost:7163/api/Character/delete/{id}");
+            var httpRequestMessage = new HttpRequestMessage
+            {
+                RequestUri = new Uri($"https://localhost:7163/api/Character/delete/{id}"),
+                Method = HttpMethod.Delete,
+            };
+            httpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", JWT);
+            var response = await _httpClient.SendAsync(httpRequestMessage);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -64,8 +71,5 @@ namespace BlazorApp1.Data
                 throw new Exception($"Error: {response.StatusCode}");
             }
         }
-
-
-
     }
 }

@@ -4,15 +4,15 @@
 @rendermode InteractiveServer
 <PageTitle>Characters</PageTitle>
 
-<p>Enter Character Id to Delete Character</p>
+<p>Enter Character Id and Token to Delete Character</p>
 <input type="number" title="Select Id" @bind="selectedId"/>
 
 <button class="btn btn-primary" @onclick="() => DeleteCharacterAsync()">Delete Character</button>
 
+
 @code {
     private int selectedId = 0;
-
-    private async Task DeleteCharacterAsync()
+    private void DeleteCharacterAsync()
     {
         Console.WriteLine("DeleteCharacterAsync()");
         try

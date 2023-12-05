@@ -6,7 +6,7 @@
 <PageTitle>Characters</PageTitle>
 
 <div>
-    @if (AddedCharacterId != 0)
+    @if (AddedCharacterId != -1)
     {
         <p>The ID of your added character is: @AddedCharacterId</p>
     }
@@ -51,7 +51,7 @@
 
 @code {
     Character character = new Character();
-    int AddedCharacterId;
+    int AddedCharacterId = -1;
     async Task Submit()
     {
         AddedCharacterId = await ApiService.AddCharacter(character);
