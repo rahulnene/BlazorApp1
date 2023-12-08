@@ -7,12 +7,12 @@
 <p>Enter Character Id and Token to Delete Character</p>
 <input type="number" title="Select Id" @bind="selectedId"/>
 
-<button class="btn btn-primary" @onclick="() => DeleteCharacterAsync()">Delete Character</button>
+<button class="btn btn-primary" @onclick="() => DeleteCharacter()">Delete Character</button>
 
 
 @code {
     private int selectedId = 0;
-    private void DeleteCharacterAsync()
+    private void DeleteCharacter()
     {
         Console.WriteLine("DeleteCharacterAsync()");
         try
