@@ -1,0 +1,44 @@
+﻿@page "/login"
+@inject ApiService ApiService
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+<PageTitle>Characters</PageTitle>
+
+<div>
+    @if (tokens is not null)
+    {
+        <p>Logged in.</p>
+    }
+    else
+    {
+        <h1> Login</h1>
+
+        <EditForm Model=@user OnValidSubmit="@Submit" FormName="Login">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div>
+                <label for="Email">Email</label>
+                <InputText id="Email" @bind-Value="user.Email" />
+            </div>
+            <div>
+                <label for="Password">Password</label>
+                <InputText id="Password" @bind-Value="user.PasswordHash" />
+            </div>
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+        </EditForm>
+    }
+</div>
+
+
+@code {
+    IdentityUser user = new IdentityUser();
+    bool? tokens;
+    async Task Submit()
+    {
+        tokens = await ApiService.Login(user);
+        StateHasChanged();
+    }
+}

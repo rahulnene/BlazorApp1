@@ -1,0 +1,47 @@
+﻿@page "/characters/delete"
+@inject HttpClient Http
+@inject ApiService ApiService
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+<PageTitle>Characters</PageTitle>
+
+@if (success.HasValue && success.Value)
+{
+    <p>Deleted character @selectedId successfully.</p>
+}
+else if (!success.HasValue)
+{
+    <p>Enter Character Id and Token to Delete Character</p>
+    <input type="number" title="Select Id" @bind="selectedId" />
+
+    <button class="btn btn-primary" @onclick="() => DeleteSelectedCharacter()">Delete Character</button>
+}
+else
+{
+    <p>@error</p>
+}
+
+@code {
+    public bool? success;
+    private int selectedId = 0;
+    private string? error;
+    private async void DeleteSelectedCharacter()
+    {
+        Console.WriteLine("DeleteCharacterAsync()");
+        try
+        {
+            // Debugging: Print selectedId to console
+            Console.WriteLine($"Selected Id: {selectedId}");
+            await ApiService.DeleteCharacter(selectedId);
+            success = true;
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+            // Debugging: Print any exception to the console
+            Console.WriteLine($"Error: {ex.Message}");
+            success = false;
+        }
+        StateHasChanged();
+    }
+}

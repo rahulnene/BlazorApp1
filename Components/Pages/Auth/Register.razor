@@ -1,0 +1,44 @@
+﻿@page "/register"
+@inject ApiService ApiService
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+<PageTitle>Characters</PageTitle>
+
+<div>
+    @if (registered)
+    {
+        <p>Successfully Registered! Please Log In.</p>
+    }
+    else
+    {
+        <h1> Register for an Account!</h1>
+
+        <EditForm Model=@user OnValidSubmit="@Submit" FormName="Register">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div>
+                <label for="Email">Email</label>
+                <InputText id="Email" @bind-Value="user.Email" />
+            </div>
+            <div>
+                <label for="Password">Password</label>
+                <InputText id="Password" @bind-Value="user.PasswordHash" />
+            </div>
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+        </EditForm>
+    }
+</div>
+
+
+@code {
+    IdentityUser user = new IdentityUser();
+    bool registered = false;
+    async Task Submit()
+    {
+        registered = await ApiService.Register(user);
+        StateHasChanged();
+    }
+}
