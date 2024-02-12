@@ -2,7 +2,7 @@
 @inject ApiService ApiService
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
-@rendermode InteractiveServer
+@* @rendermode InteractiveServer *@
 <PageTitle>Update a character</PageTitle>
 
 <div>
@@ -21,40 +21,36 @@
     else
     {
         <h1> Enter Character Details</h1>
-
         <EditForm Model=@character OnSubmit="@Submit" FormName="UpdateCharacter">
-            <div>
-                <label for="Id">Id</label>
-                <InputNumber id="Id" @bind-Value="character.Id" />
-            </div>
-            <div>
-                <label for="Name">Name</label>
-                <InputText id="Name" @bind-Value="character.Name" />
-            </div>
-            <div>
-                <label for="Class">Class</label>
-                <InputText id="Class" @bind-Value="character.Class" />
-            </div>
-            <div>
-                <label for="HitPoints">HP</label>
-                <InputNumber id="HitPoints" @bind-Value="character.HitPoints" />
-            </div>
-            <div>
-                <label for="Strength">Strength</label>
-                <InputNumber id="Strength" @bind-Value="character.Strength" />
-            </div>
-            <div>
-                <label for="Defense">Defense</label>
-                <InputNumber id="Defense" @bind-Value="character.Defense" />
-            </div>
-            <div>
-                <label for="Intelligence">Intelligence</label>
-                <InputNumber id="Intelligence" @bind-Value="character.Intelligence" />
-            </div>
-            <div>
-                <button type="submit">Submit</button>
-            </div>
-        </EditForm>
+            <DataAnnotationsValidator />
+            <FluentValidationSummary />
+            <FluentStack Orientation="Orientation.Vertical" VerticalAlignment="VerticalAlignment.Top">
+                <div>
+                    <FluentNumberField Autofocus=true Name="Character ID" Appearance="FluentInputAppearance.Filled" Label="ID" @bind-Value="character.Id" Required />
+                 </div>
+                 <div>
+                     <FluentTextField Name="Character Name" Label="Name" Appearance="FluentInputAppearance.Filled" @bind-Value="character.Name" Required />
+                 </div>
+                 <div>
+                     <FluentTextField Name="Character Class" Label="Class" Appearance="FluentInputAppearance.Filled" @bind-Value="character.Class" />
+                 </div>
+                 <div>
+                     <FluentNumberField Name="Character Health" Label="HP" Appearance="FluentInputAppearance.Filled" @bind-Value="character.HitPoints" />
+                 </div>
+                 <div>
+                     <FluentNumberField Name="Character Strength" Label="Strength" Appearance="FluentInputAppearance.Filled" @bind-Value="character.Strength" />
+                 </div>
+                 <div>
+                     <FluentNumberField Name="Character Defense" Label="Defense" Appearance="FluentInputAppearance.Filled" @bind-Value="character.Defense" />
+                 </div>
+                 <div>
+                     <FluentNumberField Name="Character Intelligence" Label="Intelligence"  Appearance="FluentInputAppearance.Filled" @bind-Value="character.Intelligence" />
+                 </div>
+                 <div>
+                     <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent">Submit</FluentButton>
+                 </div>
+             </FluentStack>
+         </EditForm>
     }
 </div>
 

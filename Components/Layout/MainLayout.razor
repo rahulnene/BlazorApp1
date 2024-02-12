@@ -1,6 +1,5 @@
 ﻿@inherits LayoutComponentBase
-
-<div class="page">
+@* <div class="page">
     <div class="sidebar">
         <NavMenu />
     </div>
@@ -14,8 +13,32 @@
             @Body
         </article>
     </main>
+</div> *@
+<div style="height: 500px;">
+    <FluentMainLayout NavMenuTitle="Navigation menu">
+        <Header><h3>Simple Character Manager</h3></Header>
+        <SubHeader><p>A subheader here</p></SubHeader>
+        <Body>
+            @Body
+        </Body>
+        <NavMenuContent>
+            <FluentNavLink Href="/home" Text="Home">Home</FluentNavLink>
+            <FluentNavLink Href="/register" Text="Register">Register</FluentNavLink>
+            <FluentNavLink Href="/login" Text="Login">Login</FluentNavLink>
+            <FluentNavLink Href="/characters/all" Text="All Characters">All Characters</FluentNavLink>
+            <FluentNavLink Href="/characters/specific" Text="Specific Character">Specific Character</FluentNavLink>
+            <FluentNavLink Href="/characters/add" Text="Add Character">Add Character</FluentNavLink>
+            <FluentNavLink Href="/characters/update" Text="Update Character">Update Character</FluentNavLink>
+            <FluentNavLink Href="/characters/delete" Text="Delete Character">Delete Character</FluentNavLink>
+        </NavMenuContent>
+    </FluentMainLayout>
 </div>
 <FluentToastProvider />
 <FluentDialogProvider />
 <FluentTooltipProvider />
 <FluentMessageBarProvider />
+
+@code
+{
+    bool Expanded = true;
+}

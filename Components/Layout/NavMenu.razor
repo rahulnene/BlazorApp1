@@ -1,4 +1,4 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@* <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">BlazorApp1</a>
     </div>
@@ -57,5 +57,19 @@
             </NavLink>
         </div>
     </nav>
-</div>
+</div> *@
 
+<FluentNavMenu @bind-Expanded="@Expanded" Width="150" Collapsible="true" Title="Collapsible demo">
+    <FluentNavLink Tooltip="Item 1 tooltip">Item 1</FluentNavLink>
+    <FluentNavLink Tooltip="Item 2 tooltip">Item 2</FluentNavLink>
+    <FluentNavGroup Title="Item 3" Tooltip="Item 3 tooltip">
+        <FluentNavLink Tooltip="Item 3.1 tooltip">Item 3.1</FluentNavLink>
+        <FluentNavLink Tooltip="Item 3.2 tooltip">Item 3.2</FluentNavLink>
+    </FluentNavGroup>
+    <FluentNavLink Disabled="true" Href="https://microsoft.com" Tooltip="Item 4 tooltip1">Item 4</FluentNavLink>
+</FluentNavMenu>
+
+@code
+{
+    bool Expanded = true;
+}

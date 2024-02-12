@@ -14,37 +14,33 @@
     {
         <h1> Enter Character Details</h1>
 
-        <EditForm Model=@character OnValidSubmit="@Submit" FormName="AddCharacter">
+        <EditForm Model=@character OnSubmit="@Submit" FormName="UpdateCharacter">
             <DataAnnotationsValidator />
-            <ValidationSummary />
-            <div>
-                <label for="Name">Name</label>
-                <InputText id="Name" @bind-Value="character.Name" />
-            </div>
-            <div>
-                <label for="Class">Class</label>
-                <InputText id="Class" @bind-Value="character.Class" />
-            </div>
-            <div>
-                <label for="HitPoints">HP</label>
-                <InputNumber id="HitPoints" @bind-Value="character.HitPoints" />
-            </div>
-            <div>
-                <label for="Strength">Strength</label>
-                <InputNumber id="Strength" @bind-Value="character.Strength" />
-            </div>
-            <div>
-                <label for="Defense">Defense</label>
-                <InputNumber id="Defense" @bind-Value="character.Defense" />
-            </div>
-            <div>
-                <label for="Intelligence">Intelligence</label>
-                <InputNumber id="Intelligence" @bind-Value="character.Intelligence" />
-            </div>
-            <div>
-                <button type="submit">Submit</button>
-            </div>
-        </EditForm>
+            <FluentValidationSummary />
+            <FluentStack>
+                 <div>
+                     <FluentTextField Autofocus=true Name="Character Name" Appearance="FluentInputAppearance.Filled" Label="Name" @bind-Value="character.Name" Required />
+                 </div>
+                 <div>
+                     <FluentTextField Name="Character Class" Appearance="FluentInputAppearance.Filled" Label="Class" @bind-Value="character.Class" />
+                 </div>
+                 <div>
+                     <FluentNumberField Name="Character Health" Appearance="FluentInputAppearance.Filled" Label="HP" HideStep=true @bind-Value="character.HitPoints" />
+                 </div>
+                 <div>
+                     <FluentNumberField Name="Character Strength" Appearance="FluentInputAppearance.Filled" Label="Strength" HideStep=true @bind-Value="character.Strength" />
+                 </div>
+                 <div>
+                     <FluentNumberField Name="Character Defense" Appearance="FluentInputAppearance.Filled" Label="Defense" HideStep=true @bind-Value="character.Defense" />
+                 </div>
+                 <div>
+                     <FluentNumberField Name="Character Intelligence" Appearance="FluentInputAppearance.Filled" Label="Intelligence" HideStep=true @bind-Value="character.Intelligence" />
+                 </div>
+                 <div>
+                     <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent">Submit</FluentButton>
+                 </div>
+             </FluentStack>
+         </EditForm>
     }
 </div>
 

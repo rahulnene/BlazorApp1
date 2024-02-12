@@ -13,22 +13,21 @@
     else
     {
         <h1> Register for an Account!</h1>
-
         <EditForm Model=@user OnValidSubmit="@Submit" FormName="Register">
             <DataAnnotationsValidator />
-            <ValidationSummary />
-            <div>
-                <label for="Email">Email</label>
-                <InputText id="Email" @bind-Value="user.Email" />
-            </div>
-            <div>
-                <label for="Password">Password</label>
-                <InputText id="Password" @bind-Value="user.PasswordHash" />
-            </div>
-            <div>
-                <button type="submit">Submit</button>
-            </div>
-        </EditForm>
+            <FluentValidationSummary />
+            <FluentStack Orientation="Orientation.Vertical">
+                <div>
+                    <FluentTextField Name="Email" Appearance="FluentInputAppearance.Filled"  Label="Email" @bind-Value="user.Email" Required />
+                 </div>
+                 <div>
+                     <FluentTextField Name="Password" Appearance="FluentInputAppearance.Filled" Label="Password" @bind-Value="user.PasswordHash" Required />
+                 </div>
+                 <div>
+                     <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent">Submit</FluentButton>
+                 </div>
+             </FluentStack>
+         </EditForm>
     }
 </div>
 

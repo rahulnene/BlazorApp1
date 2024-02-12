@@ -11,10 +11,14 @@
 }
 else if (!success.HasValue)
 {
-    <p>Enter Character Id and Token to Delete Character</p>
-    <input type="number" title="Select Id" @bind="selectedId" />
-
-    <button class="btn btn-primary" @onclick="() => DeleteSelectedCharacter()">Delete Character</button>
+    <div style="display: flex; align-items: center;">
+        <p>Enter Character Id to Delete Character</p>
+    </div>
+    <div style="display: flex; align-items: center;">
+        <FluentNumberField Autofocus=true Name="Character ID" Label="ID: " @bind-Value="selectedId" Style="margin-right: 20px" Required  />
+        <FluentButton @onclick="() => DeleteSelectedCharacter()">Delete Character</FluentButton>
+    </div>
+    
 }
 else
 {
