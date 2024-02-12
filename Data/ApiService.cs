@@ -66,7 +66,7 @@ namespace BlazorApp1.Data
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return [];
+                return null;
             }
         }
         public async Task<Character?> GetCharacter(int id)
